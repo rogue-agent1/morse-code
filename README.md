@@ -1,6 +1,6 @@
 # morse-code
 
-Encode and decode Morse code.
+Morse code encoder/decoder with audio generation.
 
 Zero dependencies. Python 3.8+.
 
