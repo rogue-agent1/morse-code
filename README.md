@@ -1,7 +1,11 @@
 # morse-code
-Morse code encoder/decoder. Zero dependencies, single file.
+
+Encode and decode Morse code
+
 ## Usage
+
 ```bash
-python3 morse_code.py encode "HELLO WORLD"
-python3 morse_code.py decode ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
+python3 morse_code.py --help
 ```
+
+Zero dependencies. Python 3.8+.

@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
-"""Morse code encoder/decoder."""
-import sys
+"""morse_code - Encode/decode Morse code."""
+import argparse, sys
 
-MORSE = {'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..','0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.','.'   :'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...',';':'-.-.-.','=':'-...-','+':'.-.-.','−':'-....-','_':'..--.-','"':'.-..-.','$':'...-..-','@':'.--.-.'}
-REVERSE = {v: k for k, v in MORSE.items()}
+CODE = {"A":".-","B":"-...","C":"-.-.","D":"-..","E":".","F":"..-.","G":"--.","H":"....",
+"I":"..","J":".---","K":"-.-","L":".-..","M":"--","N":"-.","O":"---","P":".--.",
+"Q":"--.-","R":".-.","S":"...","T":"-","U":"..-","V":"...-","W":".--","X":"-..-",
+"Y":"-.--","Z":"--..","0":"-----","1":".----","2":"..---","3":"...--","4":"....-",
+"5":".....","6":"-....","7":"--...","8":"---..","9":"----.",".":" .-.-.-",",":" --..--",
+"?":" ..--..","!":" -.-.--"," ":" / "}
+DECODE = {v.strip(): k for k, v in CODE.items() if k != " "}
 
 def encode(text):
-    words = text.upper().split()
-    return ' / '.join(' '.join(MORSE.get(c, c) for c in w) for w in words)
+    return " ".join(CODE.get(c.upper(), "") for c in text)
 
 def decode(morse):
-    words = morse.strip().split(' / ')
-    return ' '.join(''.join(REVERSE.get(c, c) for c in w.split()) for w in words)
+    words = morse.split(" / ")
+    return " ".join("".join(DECODE.get(c, "?") for c in w.split()) for w in words)
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: morse_code.py <encode|decode> <text>")
-        sys.exit(1)
-    cmd, text = sys.argv[1], ' '.join(sys.argv[2:])
-    if cmd == 'encode':
-        print(encode(text))
-    elif cmd == 'decode':
-        print(decode(text))
-    else:
-        print(f"Unknown command: {cmd}")
-        sys.exit(1)
+    p = argparse.ArgumentParser(description="Morse code encoder/decoder")
+    sub = p.add_subparsers(dest="cmd")
+    e = sub.add_parser("encode"); e.add_argument("text", nargs="+")
+    d = sub.add_parser("decode"); d.add_argument("morse", nargs="+")
+    a = p.parse_args()
+    if a.cmd == "encode": print(encode(" ".join(a.text)))
+    elif a.cmd == "decode": print(decode(" ".join(a.morse)))
+    else: p.print_help()
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__": main()
