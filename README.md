@@ -1,9 +1,3 @@
-# morse-code
-
-Morse code encoder/decoder. Zero-dependency, single-file Python CLI.
-
-## Usage
-
-```bash
-python3 morse_code.py --help
-```
+# morse_code
+Morse code — encode, decode, timing generation.
+Single-file Python, zero dependencies.
