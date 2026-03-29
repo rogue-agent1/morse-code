@@ -1,6 +1,6 @@
 # morse-code
 
-Morse code encoder/decoder
+Morse Code Encoder/Decoder. Zero-dependency, single-file Python CLI.
 
 ## Usage
 
@@ -8,7 +8,6 @@ Morse code encoder/decoder
 python3 morse_code.py --help
 ```
 
-## Features
+## License
 
-- Zero dependencies (Python 3.8+)
-- Single file implementation
+MIT
